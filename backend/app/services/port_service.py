@@ -14,7 +14,8 @@ ports = [
         total_capacity=30,
         available_capacity=8,
         ships_in_port=22,
-        waiting_ships=7
+        waiting_ships=7,
+        waiting_cost_per_hour=10000
     ),
 
     Port(
@@ -27,7 +28,8 @@ ports = [
         total_capacity=20,
         available_capacity=0,
         ships_in_port=20,
-        waiting_ships=12
+        waiting_ships=12,
+        waiting_cost_per_hour= 12000
     )
 ]
 
@@ -99,3 +101,58 @@ def estimate_waiting_time(port_name: str):
         "port": port_name,
         "error": "Port not found"
     }
+def calculate_waiting_cost(port_name: str):
+    for port in ports:
+        if port.name.lower() == port_name.lower():
+
+            average_service_time = 0.5
+
+            waiting_time = port.waiting_ships * average_service_time
+
+            waiting_cost = waiting_time * port.waiting_cost_per_hour
+
+            return {
+                "port": port.name,
+                "waiting_ships": port.waiting_ships,
+                "estimated_waiting_time_hours": waiting_time,
+                "waiting_cost_per_hour": port.waiting_cost_per_hour,
+                "estimated_waiting_cost": waiting_cost
+            }
+
+    return {
+        "port": port_name,
+        "error": "Port not found"
+    }
+def find_alternative_ports(vessel):
+    alternatives = []
+
+    for port in ports:
+
+        if vessel.length > port.max_vessel_length:
+            continue
+
+        if vessel.width > port.max_vessel_width:
+            continue
+
+        if vessel.draft > port.max_draft:
+            continue
+
+        if port.available_capacity <= 0:
+            continue
+
+        average_service_time = 0.5
+
+        waiting_time = port.waiting_ships * average_service_time
+
+        waiting_cost = waiting_time * port.waiting_cost_per_hour
+
+        alternatives.append({
+            "port": port.name,
+            "available": True,
+            "waiting_ships": port.waiting_ships,
+            "estimated_waiting_time_hours": waiting_time,
+            "waiting_cost_per_hour": port.waiting_cost_per_hour,
+            "estimated_waiting_cost": waiting_cost
+        })
+
+    return alternatives

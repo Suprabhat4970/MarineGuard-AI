@@ -12,4 +12,5 @@ class Port(BaseModel):
     available_capacity: int
     ships_in_port: int
     waiting_ships: int
+    waiting_cost_per_hour: float
     
