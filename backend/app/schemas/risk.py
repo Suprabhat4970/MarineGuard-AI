@@ -6,3 +6,5 @@ class RouteRiskRequest(BaseModel):
     wave_height: float
     visibility: float
     weather_condition: str
+    start_port: str
+    destination_port: str
