@@ -2,6 +2,7 @@ from app.services.port_service import ports
 from fastapi import APIRouter
 from app.schemas.risk import RouteRiskRequest
 from app.services.risk_service import calculate_route_risk
+from app.services.weather_service import get_weather
 
 router = APIRouter(
     prefix="/risk",
@@ -27,13 +28,21 @@ def calculate_risk(request: RouteRiskRequest):
         return {
             "error": "Destination port not found"
         }
+    start_port = next(
+    port for port in ports
+    if port.name.lower() == request.start_port.lower()
+)
+    weather = get_weather(
+    start_port.latitude,
+    start_port.longitude
+)
     
     result = calculate_route_risk(
-        request.wind_speed,
-        request.wave_height,
-        request.visibility,
-        request.weather_condition
-    )
+    weather["wind_speed"],
+    weather["wave_height"],
+    weather["visibility"],
+    weather["weather_condition"]
+)
 
     return {
         "start_port": request.start_port,

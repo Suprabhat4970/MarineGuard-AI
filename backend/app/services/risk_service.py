@@ -48,15 +48,15 @@ def calculate_route_risk(wind_speed, wave_height, visibility, weather_condition)
     elif risk_score <= 60:
         risk_level = "MEDIUM"
     else:
-        risk_level = "HIGH"
+      risk_level = "HIGH"
 
-        return {
-        "risk_score": risk_score,
-        "risk_level": risk_level,
-        "risk_factors": {
-            "wind": wind_risk,
-            "waves": wave_risk,
-            "visibility": visibility_risk,
-            "weather": weather_risk
-        }
+    return {
+    "risk_score": risk_score,
+    "risk_level": risk_level,
+    "risk_factors": {
+        "wind": wind_risk,
+        "waves": wave_risk,
+        "visibility": visibility_risk,
+        "weather": weather_risk
     }
+}
