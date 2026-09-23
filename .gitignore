@@ -3,3 +3,6 @@ __pycache__/
 .env
 *.pyc
 .ipynb_checkpoints/
+# ERA5 test/download files
+ml/era5_test.zip
+ml/era5_test/
