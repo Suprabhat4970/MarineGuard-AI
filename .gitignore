@@ -6,3 +6,8 @@ __pycache__/
 # ERA5 test/download files
 ml/era5_test.zip
 ml/era5_test/
+# ERA5 temporary test files
+ml/era5_test_cell_*.zip
+ml/era5_test_cell_*/
+ml/era5_multi_point_test.zip
+ml/era5_multi_point_test/
