@@ -11,3 +11,6 @@ ml/era5_test_cell_*.zip
 ml/era5_test_cell_*/
 ml/era5_multi_point_test.zip
 ml/era5_multi_point_test/
+# ERA5 temporary hourly test files
+ml/era5_hourly_test.zip
+ml/era5_hourly_test/
